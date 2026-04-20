@@ -1,8 +1,10 @@
 import json
 from pathlib import Path
 from google import genai
-from google.genai import types  # Use types for cleaner Part construction
+from google.genai import types
 from response_schema import Yamls 
+
+gemini_model = "gemini-2.5-flash"
 
 def get_relevant_pieces_from_json(pieces):
     res = {}
@@ -16,26 +18,21 @@ def get_relevant_pieces_from_json(pieces):
 if not Path("lyrics.json").exists():
     raise Exception("lyrics.json not found. Please generate or copy it from somewhere.")
 
-# --- Load API key ---
 SECRETS_PATH = Path(__file__).parent.parent.parent / "ueda.secrets.json"
 with SECRETS_PATH.open() as f:
     api_key = json.load(f)["GEMINI_API_KEY"]
 
-# --- Create client ---
 client = genai.Client(api_key=api_key)
 
-# --- Load prompt text ---
 PROMPT_PATH = Path(__file__).parent / "prompt.txt"
 with PROMPT_PATH.open(encoding="utf-8") as prompt_file:
     prompt_text = prompt_file.read()
 
-# --- Paths ---
 thisfile = Path(__file__)
 input_dir = thisfile.parent.parent / "input"
 output_dir = thisfile.parent.parent / "input"
 output_dir.mkdir(parents=True, exist_ok=True)
 
-# --- Collect input PDFs ---
 input_files: dict[str, Path] = {}
 existing: set[str] = set()
 
@@ -52,8 +49,6 @@ for input_dir_item in input_dir.iterdir():
 for removable in existing:
     input_files.pop(removable, None)
 
-# --- Upload PDFs ---
-# Note: In the new SDK, you can pass the Path object directly to 'file'
 uploaded_files = []
 pieces = []
 for uploadable_path in input_files.values():
@@ -72,7 +67,6 @@ for uploadable_path in input_files.values():
 if len(uploaded_files) == 0:
     print("No pdf files in input folders without an associated yaml. Quitting...")
 
-# --- Upload reference PDF ---
 reference_pdf_path = thisfile.parent / "428_(reference).pdf"
 reference_file = client.files.upload(
     file=reference_pdf_path,
@@ -100,11 +94,7 @@ expl_file = client.files.upload(
     }
 )
 
-# --- Build multimodal contents ---
-# In 1.73.1, use types.Part.from_uri or types.FileData
 contents = []
-
-# Add all uploaded PDFs
 for uf in uploaded_files:
     contents.append(
         types.Part(
@@ -115,7 +105,6 @@ for uf in uploaded_files:
         )
     )
 
-# Add reference PDF
 contents.append(
     types.Part(
         file_data=types.FileData(
@@ -125,7 +114,6 @@ contents.append(
     )
 )
 
-# Add reference YAML
 contents.append(
     types.Part(
         file_data=types.FileData(
@@ -135,7 +123,6 @@ contents.append(
     )
 )
 
-# Add expanation file
 contents.append(
     types.Part(
         file_data=types.FileData(
@@ -146,16 +133,13 @@ contents.append(
 )
 
 
-# Add prompt
 contents.append(types.Part(text=prompt_text))
 
-# Add lyrics json
 lyrics_json = get_relevant_pieces_from_json(pieces)
 contents.append(types.Part(text=str(lyrics_json)))
 
-# Generate response
 response = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model=gemini_model,
     contents=contents,
     config=types.GenerateContentConfig(
         response_mime_type="application/json",
@@ -163,13 +147,7 @@ response = client.models.generate_content(
     ),
 )
 
-# --- Parse Response ---
-# When using response_schema, the SDK automatically parses it into an object
-# accessible via response.parsed
 response_data = response.parsed
-
-# --- Write YAML files ---
-# Accessing attributes directly from the parsed object (assuming Yamls has a 'yamls' field)
 for yaml_item in response_data["yamls"]:
     for in_dir in output_dir.iterdir():
         if Path(name_of_res_file.replace(".yaml", ".pdf")).exists():

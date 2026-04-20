@@ -32,7 +32,7 @@ add ueda.secrets.json to the repo root, containing the api key to use gemini:
 
 Activate and install poetry dependencies.
 
-## Run ai generation of yamls
+## Run AI generation of yamls
 Then you should be able to run generate_yamls.py within the ueda_smtr/ai directory
 
 Due to limit of free tokens to use gemini, currently there is a break on line 71 of generate_yamls.py, so it just creates one of the files when the script is ran.
