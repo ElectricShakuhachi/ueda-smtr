@@ -1,0 +1,172 @@
+
+I have attached a list of pdf files, the other ones are the source files to be used for generating yaml files,
+however, the file 428_(reference).pdf that is a reference and maps to this example yaml:
+
+#### start of 428.yaml ####
+product_no: 428
+teaching_level: Kaiden
+level_numbers: 28
+japanese_name: 雪の夜
+romaji_name: Yuki no Yo
+trans_name: Night of Snow
+type: Dokusō Honkyoku
+composer: Ueda Hōdō
+arranger:
+lyricist:
+writer: Ueda Kadō
+edition: 8
+int_publ_version: 1
+orig_price: 200
+shamisen_tuning:
+koto_tuning:
+markings:
+ - id: 45
+   locations: 1-(1)
+ - id: 1
+   locations: 1-(1,4,8) 2-(2)
+ - id: 46
+   locations: 1-(1,6,8)
+ - id: 47
+   locations: 1-(4)
+ - id: 48
+   locations: 1-(4)
+ - id: 49
+   locations: 1-(8)
+ - id: 40
+   locations: 1-(8)
+ - id: 9
+   locations: 2-(1)
+ - id: 51
+   locations: 2-(1)
+ - id: 52
+   locations: 2-(1)
+ - id: 53
+   locations: 2-(2)
+ - id: 54
+   locations: 2-(2)
+ - id: 50
+   locations: 2-(3)
+ - id: 3
+   locations: 2-(6)
+ - id: 55
+   locations: 2-(6)
+orig_lyrics:
+trans_lyrics:
+orig_notes: （上田芳憧作曲）演了約十分
+trans_notes: Composed by Ueda Hōdō. Takes around 10 minutes to perform
+orig_extra_notes: 第一章は寒夜静寂、第二章は深夜降雪、第三章は黎明鳥聲、第四章は白雪皚々となっている。
+ 静寂そのものの寒夜、音もなく雪は降っている。鳥の声に黎明は近づき、見れば一面の銀世界であるという意味である。
+ （要旨）古典的に作曲された当流の秘曲である。精神を落ち着けて、無我にして吹奏することこそが要旨である。（上田流楽譜解説）
+extra_notes:
+The first section expresses the stillness of a cold night.
+The second depicts snow falling in the deep of night.
+The third portrays the cries of birds at daybreak.
+The fourth shows a landscape made brilliantly white with fresh snow.
+
+It conveys the meaning of a silent winter night in which snow falls without a sound; then, as the birds begin to call, dawn approaches, and when one looks out, the world has become a field of silver.
+
+(Summary)  
+This is a secret piece of our school, composed in a classical style.
+Its essential point is to calm the mind and play in a state free of self.
+(Ueda‑ryū Gakufu Kaisetsu)
+
+print_date: 25.5.2002
+orig_publ_date: 30.5.2002
+int_publ_date: 2.2.2026
+#### end of 428.yaml ####
+
+The marking id's come from this map:
+{1: "徐", 2: "緩", 3: "漸次徐", 4: "漸次速", 5: "徐々速", 6: "稍重く", 7: "淡泊に",
+8: "少し経快に", 9: "一打", 10: "第一部", 11: "第二部 (red)", 12: "替手合調",
+13: "本手合調 (red)", 14: "手事", 15: "替手 (red)", 16: "前段と合調",  17: "後段と合調",
+18: "静かに", 19: "心うれしく", 20:　"(3 notes lenght under note)", 
+21: "(trioli)",  22: "p", 23: "mf", 24: "f", 25: "ff",  26: "(fermata)", 27: "少早",
+28: "中唐", 30: "(Dim)", 32: "五打", 33: "(trioli with 3 in Japanese)",
+34: "小速",  35: "大甲", 36: "./.", 37: "速", 38: "(nayashi)", 39: "(merikomi)",
+40: "三打",　41: "二四打",　42: "二打", 43: "一三打", 44: "玉吹き", 45: "（寒夜静寂）",
+46: "打", 47: "（深夜降雪）",　48: "三押", 49: "（黎明鳥聲）",
+50: "(4 notes lenght under note)", 51: "スル", 52: "カル, 53: "（白雪皚々）",
+54: "漸次早く", 55: "二 beside レ"}
+
+And the locations refer to page (starting with 1 as the page where the sheet music begins, so the
+title pages are not counted) and then row in parentheses. The dense vertical lines
+consisting of the katakana ro, tsu, re, chi, ha and hi (and sometimes others) are rows,
+and markings refer to the line to the left of them, so the row can be determined by
+counting those dense vertical clusters of ro, tsu, re, chi, ha, hi etc. that are to the
+right of that marking, and adding one.
+
+The katakana for ro, tsu, re chi, ha, hi, and the lines and circles that repeats
+often next to or between them are not extra markings, but when there are such characters as
+in the map above marked into the sheet music, if possible populate the marking list in the yaml with
+them and their locations.
+
+The name is likely written in large characters on the front page,
+along with the writer. The name then repeats on the left at the beginning
+of the piece on the second page. Under that the composer's name might be written.
+The composer is most often Ueda Hōdō = 上田芳憧. And the writer could most likely be either
+上田佳憧 = Ueda Kadō or 上田芳誠 = Ueda Hōsei
+
+There could be notes on performance etc. atteched under the composers name and/or in the
+end of the piece. These should be collected to orig_notes and translated to
+trans_notes. The orig_extra_notes can possibly be found under the piece's name in the third attached document, 上田流本曲解説.pdf
+those should be put to the yaml and translated under extra_notes
+The print_date and orig_publ_date can be found in the last page of the source pdf.
+along with orig_price (the price of the sheet music in yen).
+Ignore the other texts within the box on the last page which are about the addresses and so on. 
+
+The attached document uedaryu_gakufu_kaisetsu.pdf is provided as reference to the orig_extra_notes which are to be added to the yaml, and then translated to extra_notes
+Please make sure to include these if the uedaryu_gakufu_kaisetsu.pdf as info on the piece in the given pdf.
+
+At the beginning of the first page, shamisen and koto tunings may be marked, or possibly just one of them.
+Use the format below
+
+{Instrument} in {tuning type} tuning:\n1st string = {string1}\ns2nd string = {string2}\n3rd string = {string3}
+The tuning of each string corresponds to the katakana next to the numerical kanji sign. So if for shamisen it says for instance:
+三弦
+ロ　一
+レ　二
+ハ　三
+(三上り)
+
+The output for shamisen_tuning should be:
+Shamisen in san-agari tuning:\n1st string = RO\ns2nd string = RE\n3rd string = HA
+Use romaji for the katakana and in capital letters.
+Even if you are not sure what each string corresponds to in the pdf, just write your best guess.
+Also dont forget to write this for both shamisen and koto, too into koto_tuning
+
+If tuning seems to be missing for both koto and shamisen, but piece type is jiuta, write:
+Shamisen in hon-chōshi tuning:\n1st string = RO\ns2nd string = RE\n3rd string = RO
+and
+Koto in hirajōshi tuning:\n1st string = RE\ns2nd string = HA\n3rd string = RO
+If the type of piece is sokyoku, but no tunings are found, just write the koto tuning.
+
+
+If there are two or more pieces in the sheet, you can write both of them with the piece name like:
+Kurokami:Shamisen in san-agari tuning.... Asatode: Shamisen in honchōshi tuning...
+
+Also write out the parts of the yaml where there is no value to be found, and leave the valua blank, just like
+in the reference yaml.
+
+The values in the yaml that are Japanese such as the composer name etc. should be written in romaji,
+except japanese_name, orig_notes and orig_extra_notes.
+
+Make sure to use the Hepburn system of romanization so that a long o in Japanese would be romanized as ō and a long u as ū
+
+Give the response in json format with the schema provided, containing the filenames for the yaml files, and their content.
+The filenames should be the same as the pdf that the data for that yaml came from, with just the extension changed to yaml.
+Make sure to be extra careful that those yaml filenames coming in the response are matching with the pdf's.
+If the source pdf is named 508.pdf for example, the yaml should be named 508.yaml
+
+Do not include the file for Yuki no Yo (428.yaml) in the output because that is only provided as a reference file.
+Make sure the contents of that file are not used in the output - it is just a reference for the format.
+
+Sometimes there may be more than one piece in one sheet music. For instance, it could be two pieces, Kurokami and Asatode.
+In those cases the name would be all the piece names, comma separated, like Kurokami, Asatode and the orig lyrics and trans lyrics should include both, one after another.
+
+If there is a json with lyrics included together with this prompt, those are the lyrics for the piece to be added to orig_lyrics and translated to trans_lyrics.
+The sheet may also include the lyrics written in red next to the notes (ro, tsu, re chi) and so on, but the ones in the json are more trustworthy, if provided.
+The ones written in red in the sheet music could be used for reference if there is something unclear in the lyrics in the json, but as they are in calligraphy and hard to
+decipher correctly, always trust the json lyrics over those.
+
+type could be found from Ueda‑ryū Gakufu Kaisetsu, but if there are lyrics, and explanations, those might also say that it is a jiuta, sōyoku, nagauta etc.
+If there are lyrics and there is no info about what type of piece it is, write it as jiuta. However, 地歌筝曲 = sōkyoku, not jiuta.

@@ -1,0 +1,12 @@
+__pycache__
+ueda_smtr/input/**/*.pdf
+ueda_smtr/output/**/*.pdf
+*.yaml
+ueda.secrets.json
+*.whl
+lyrics.json
+dev.md
+ueda_smtr/ai/428_(reference).pdf
+ueda_smtr/ai/uedaryu_gakufu_kaisetsu.pdf
+*.log
+stats.csv

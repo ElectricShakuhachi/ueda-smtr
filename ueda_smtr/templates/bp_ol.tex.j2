@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{pdfoverlay}
+\usepackage{eurosym}
+\usepackage[paper=b5j,margin=1in]{geometry}
+\usepackage{anyfontsize}
+\usepackage{graphicx}
+\pagenumbering{gobble}
+\pdfoverlaySetPDF{./bp_bg.pdf}
+\vspace*{6.15cm}
+\begin{document}
+\begin{center}
+    {\fontsize{14}{14}\selectfont {{ edition }}th edition}\\[0.01cm]
+    {\fontsize{10}{10}\selectfont Printed {{ print_date }}}\\[0.01cm]
+    {\fontsize{10}{10}\selectfont Published {{ orig_publ_date }}}\\[0.00001cm]
+    {\fontsize{10}{10}\selectfont Released by the copyright owner}\\[0.15cm]
+    {\fontsize{20}{20}\selectfont {{ rights_owner }}}\\[0.01cm]
+    {\fontsize{6}{6}\selectfont {{ rights_loc }}}\\[0.001cm]
+    {\fontsize{10}{10}\selectfont Printed by {{ printer }}}\\[0.01cm]
+    {\fontsize{10}{10}\selectfont at the Kashimura Printing Corp.}\\[0.001cm]
+    {\fontsize{6}{6}\selectfont {{ print_loc }}}\\[0.01cm]
+    {\fontsize{10}{0}\selectfont Released at Ueda-ryū Sheet Music}\\[0.02cm]
+    {\fontsize{10}{0}\selectfont Publication Society}\\[0.0000000001cm]
+    {\fontsize{8}{0}\selectfont (Payment account: Ōsaka {{ payment_acc }})}\\[0.03cm]
+
+    {\fontsize{10}{10}\selectfont 1st translated edition published}\\[0.001cm]
+    {\fontsize{10}{10}\selectfont {{ int_publ_date }} at}\\[0.01cm]
+    {\fontsize{12}{12}\selectfont www.uedaryu.com}\\[0.01cm]
+    {\fontsize{10}{10}\selectfont Translations by Aaro Haavisto}\\[0.655cm]
+
+    {\fontsize{12}{12}\selectfont {{ price }}\euro}
+\end{center}
+\end{document}

@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{pdfoverlay}
+\usepackage[paper=b5j,margin=1in]{geometry}
+\usepackage{anyfontsize}
+\usepackage{graphicx}
+\pagenumbering{gobble}
+\pdfoverlaySetPDF{./ep_bg.pdf}
+
+\begin{document}
+{% if page_i == 0 %}
+    \begin{center}
+        {\fontsize{20}{20}\selectfont {{ trans_name }}}\\[0.33cm]
+        {% if composer is not none %}
+            {\fontsize{12}{12}\selectfont Composed by {{ composer }}}
+        {% endif %}
+        {% if arranger is not none %}
+            {\fontsize{12}{12}\selectfont Arranged by {{ arranger }}}
+        {% endif %}
+        {% if lyricist is not none %}
+            {\fontsize{12}{12}\selectfont Lyrics by {{ lyricist }}}
+        {% endif %}
+    \end{center}
+    \vspace*{0.1cm}
+    \begin{center}
+        {% if shamisen_tuning is not none %}
+            {\fontsize{12}{12}\selectfont {{ shamisen_tuning }}}
+            \vspace*{0.1cm}
+        {% endif %}
+        {% if koto_tuning is not none %}
+            {\fontsize{12}{12}\selectfont {{ koto_tuning }}}
+            \vspace*{0.1cm}
+        {% endif %}
+    \end{center}
+{% endif %}
+
+
+\begin{center}
+
+    {% if markings|length > 0 %}
+        {\fontsize{20}{20}\selectfont Special notations:}\\[0.5cm]
+    {% endif %}
+    {% for note in markings %}
+        {\includegraphics[width=0.5cm]{ {{ note.id }}.png }}
+        {\fontsize{12}{12}\selectfont {{ note.translation }}}
+        {\fontsize{6}{6}\selectfont {{ note.locations }}}
+        \vspace*{0.1cm}
+    {% endfor %}
+    \vspace*{1cm}
+\end{center}
+
+{% for text in texts %}
+    \begin{center}
+        {\fontsize{16}{16}\selectfont {{ text.caption }}}
+    \end{center}
+    {\fontsize{12}{12}\selectfont {{ text.content }}}
+{% endfor %}
+
+\end{document}
